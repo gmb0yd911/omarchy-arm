@@ -200,6 +200,9 @@ case "$platform" in
     ok "Platform: Raspberry Pi (pre-5)"
     warn "Only the Pi 5 is tested. Older Pis have no Vulkan-capable GPU for Hyprland."
     ;;
+  firefly-itx-3588j|rockchip-rk3588)
+    ok "Platform: Firefly ITX-3588J (Rockchip RK3588)"
+    ;;
   generic-aarch64)
     ok "Platform: generic aarch64 (virtual machine or unrecognised board)"
     ;;
