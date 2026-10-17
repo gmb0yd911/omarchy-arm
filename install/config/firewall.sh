@@ -1,3 +1,6 @@
+# Keep firewall disabled during configuration so ufw updates config files without live reload
+sed -i "s/^ENABLED=.*/ENABLED=no/" /etc/ufw/ufw.conf 2>/dev/null || true
+
 # Allow nothing in, everything out.
 ufw default deny incoming
 ufw default allow outgoing
