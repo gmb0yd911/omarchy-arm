@@ -18,3 +18,7 @@ local require_optional = require("default.hypr.require_optional")
 if o.shell_succeeds(o.shell_quote(paths.omarchy_path .. "/bin/omarchy-hw-raspberry-pi")) then
   require_optional.module("default.hypr.platform.raspberry-pi")
 end
+
+if o.shell_succeeds(o.shell_quote(paths.omarchy_path .. "/bin/omarchy-hw-firefly")) then
+  require_optional.module("default.hypr.platform.firefly")
+end

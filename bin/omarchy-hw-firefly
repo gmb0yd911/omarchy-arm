@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# omarchy:summary=Detect whether the computer is a Firefly ITX-3588J or Rockchip RK3588 board.
+
+platform=$(omarchy-hw-platform)
+[[ $platform == "firefly-itx-3588j" || $platform == "rockchip-rk3588" ]]

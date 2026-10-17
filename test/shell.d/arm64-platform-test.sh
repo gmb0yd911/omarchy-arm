@@ -32,6 +32,8 @@ mac=$(fixture mac "apple,j413 apple,t8112 apple,arm-platform" "Apple MacBook Air
 vm=$(fixture vm "linux,dummy-virt")
 # An Asahi kernel old enough to predate the apple,arm-platform compatible.
 mac_old=$(fixture mac_old "apple,j274" "Apple Mac mini (M1, 2020)")
+firefly=$(fixture firefly "rockchip,rk3588-firefly-itx-3588j rockchip,rk3588" "Firefly ITX-3588J HDMI(Linux)")
+firefly_model_only=$(fixture firefly_model_only "unknown" "Firefly ITX-3588J")
 
 [[ $(platform_of "$pi5") == "raspberry-pi-5" ]] || fail "a Pi 5 is recognised" "$(platform_of "$pi5")"
 pass "a Pi 5 is recognised"
@@ -44,6 +46,12 @@ pass "an Apple Silicon Mac is recognised"
 
 [[ $(platform_of "$mac_old") == "apple-silicon" ]] || fail "a Mac is recognised from its model string alone" "$(platform_of "$mac_old")"
 pass "a Mac is recognised from its model string alone"
+
+[[ $(platform_of "$firefly") == "firefly-itx-3588j" ]] || fail "a Firefly ITX-3588J is recognised" "$(platform_of "$firefly")"
+pass "a Firefly ITX-3588J is recognised"
+
+[[ $(platform_of "$firefly_model_only") == "firefly-itx-3588j" ]] || fail "a Firefly is recognised from model string alone" "$(platform_of "$firefly_model_only")"
+pass "a Firefly is recognised from model string alone"
 
 [[ $(platform_of "$vm") == "generic-aarch64" ]] || fail "an aarch64 VM falls through to generic" "$(platform_of "$vm")"
 pass "an aarch64 VM falls through to generic"
@@ -80,3 +88,11 @@ pass "omarchy-hw-raspberry-pi --5 rejects an older Pi"
 OMARCHY_ARCH=aarch64 OMARCHY_DEVICETREE="$pi4" omarchy-hw-raspberry-pi ||
   fail "omarchy-hw-raspberry-pi accepts an older Pi"
 pass "omarchy-hw-raspberry-pi accepts an older Pi"
+
+OMARCHY_ARCH=aarch64 OMARCHY_DEVICETREE="$firefly" omarchy-hw-firefly ||
+  fail "omarchy-hw-firefly matches Firefly ITX-3588J"
+pass "omarchy-hw-firefly matches Firefly ITX-3588J"
+
+OMARCHY_ARCH=x86_64 OMARCHY_DEVICETREE="$firefly" omarchy-hw-firefly &&
+  fail "omarchy-hw-firefly rejects x86_64"
+pass "omarchy-hw-firefly rejects x86_64"

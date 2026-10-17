@@ -14,6 +14,10 @@ case "$(omarchy-hw-platform)" in
     # V3DV, Mesa's Vulkan driver for VideoCore.
     omarchy_arm_pkg_add_available vulkan-broadcom
     ;;
+  firefly-itx-3588j|rockchip-rk3588)
+    # Panfrost / Panthor Vulkan driver for ARM Mali-G610
+    omarchy_arm_pkg_add_available vulkan-panfrost
+    ;;
   generic-aarch64)
     # A VM with no accelerated GPU: virtio-gpu with Venus, and the software
     # rasterizer as the fallback that keeps Hyprland able to start at all.

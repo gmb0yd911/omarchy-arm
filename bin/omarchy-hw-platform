@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# omarchy:summary=Print the hardware platform Omarchy is running on (apple-silicon, raspberry-pi-5, raspberry-pi, generic-aarch64 or x86_64).
+# omarchy:summary=Print the hardware platform Omarchy is running on (apple-silicon, raspberry-pi-5, raspberry-pi, firefly-itx-3588j, generic-aarch64 or x86_64).
 # omarchy:examples=omarchy hw platform
 
 # Detection reads the flattened device tree, which is where every aarch64
@@ -27,6 +27,10 @@ case "$compatible " in
     echo "apple-silicon"
     exit 0
     ;;
+  *"rockchip,rk3588-firefly-itx-3588j "*|*"rockchip,rk3588 "*|*"rockchip,rk35"*)
+    echo "firefly-itx-3588j"
+    exit 0
+    ;;
   *"raspberrypi,5-"*|*"brcm,bcm2712 "*)
     echo "raspberry-pi-5"
     exit 0
@@ -42,6 +46,10 @@ esac
 case "$model" in
   Apple*)
     echo "apple-silicon"
+    exit 0
+    ;;
+  *"Firefly ITX-3588J"*|*"ITX-3588J"*)
+    echo "firefly-itx-3588j"
     exit 0
     ;;
   "Raspberry Pi 5"*)
